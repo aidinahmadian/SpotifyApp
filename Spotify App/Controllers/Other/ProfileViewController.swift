@@ -18,7 +18,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     }()
     
     private var models = [String]()
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,6 +100,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = models[indexPath.row]
+        cell.textLabel?.font = .systemFont(ofSize: 14, weight: .semibold)
         cell.selectionStyle = .none
         return cell
     }
