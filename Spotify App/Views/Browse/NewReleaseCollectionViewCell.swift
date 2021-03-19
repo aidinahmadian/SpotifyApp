@@ -22,7 +22,7 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
     
     private let albumNameLabel: UILabel = {
        let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .semibold)
+        label.font = .systemFont(ofSize: 14, weight: .bold)
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -30,15 +30,16 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
     
     private let artistNameLabel: UILabel = {
        let label = UILabel()
-        label.font = .systemFont(ofSize: 12, weight: .medium)
+        label.font = .systemFont(ofSize: 12, weight: .semibold)
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .secondaryLabel
         return label
     }()
     
     private let numberOfTracksLabel: UILabel = {
        let label = UILabel()
-        label.font = .systemFont(ofSize: 12, weight: .regular)
+        label.font = .systemFont(ofSize: 12, weight: .medium)
         label.numberOfLines = 0
         label.textAlignment = .right
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -71,14 +72,14 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
         albumCoverImageView.widthAnchor.constraint(equalToConstant: contentView.height).isActive = true
         albumCoverImageView.heightAnchor.constraint(equalToConstant: contentView.height).isActive = true
         
-        albumNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
+        albumNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6).isActive = true
         albumNameLabel.leadingAnchor.constraint(equalTo: albumCoverImageView.trailingAnchor, constant: 10).isActive = true
         albumNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5).isActive = true
-        albumNameLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
+        albumNameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
         artistNameLabel.topAnchor.constraint(equalTo: albumNameLabel.bottomAnchor, constant: 5).isActive = true
         artistNameLabel.leadingAnchor.constraint(equalTo: albumCoverImageView.trailingAnchor, constant: 10).isActive = true
-        artistNameLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
+        artistNameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
         numberOfTracksLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5).isActive = true
         numberOfTracksLabel.leadingAnchor.constraint(equalTo: artistNameLabel.trailingAnchor, constant: 5).isActive = true

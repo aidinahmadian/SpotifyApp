@@ -8,10 +8,13 @@
 import UIKit
 
 class TabBarViewController: UITabBarController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.tabBar.tintColor = .white
+        self.tabBar.isTranslucent = false
+        UITabBar.appearance().barTintColor = #colorLiteral(red: 0.152813971, green: 0.1568908393, blue: 0.156884402, alpha: 1)
+        
         let vc1 = HomeViewController()
         let vc2 = SearchViewController()
         let vc3 = LibraryViewController()
@@ -32,7 +35,7 @@ class TabBarViewController: UITabBarController {
         nav2.navigationBar.tintColor = .label
         nav3.navigationBar.tintColor = .label
         
-        nav1.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 1)
+        nav1.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house.fill"), tag: 1)
         nav2.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 2)
         nav3.tabBarItem = UITabBarItem(title: "Library", image: UIImage(systemName: "music.note.list"), tag: 3)
         

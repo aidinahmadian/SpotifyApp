@@ -32,7 +32,7 @@ class PlaylistViewController: UIViewController {
 
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [
-            NSCollectionLayoutBoundarySupplementaryItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(380)), elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+            NSCollectionLayoutBoundarySupplementaryItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(415)), elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
         ]
         return section
     }))
@@ -120,7 +120,7 @@ extension PlaylistViewController: UICollectionViewDelegate, UICollectionViewData
             kind == UICollectionView.elementKindSectionHeader else {
             return UICollectionReusableView()
         }
-        let headerViewModel = PlaylistHeadeViewViewModel(name: playlist.name, ownerName: "by: \(playlist.owner.display_name)", description: playlist.description, artworkURL: URL(string: playlist.images.first?.url ?? "-"))
+        let headerViewModel = PlaylistHeadeViewViewModel(name: playlist.name, ownerName: playlist.owner.display_name, description: playlist.description, artworkURL: URL(string: playlist.images.first?.url ?? "-"))
         header.configure(with: headerViewModel)
         header.delegate = self
         return header

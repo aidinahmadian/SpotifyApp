@@ -22,7 +22,7 @@ class FeaturedPlaylistCollectionViewCell: UICollectionViewCell {
     
     private let playlistNameLabel: UILabel = {
        let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .semibold)
+        label.font = .systemFont(ofSize: 14, weight: .bold)
         label.numberOfLines = 0
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false

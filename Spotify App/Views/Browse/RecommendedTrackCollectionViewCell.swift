@@ -20,18 +20,32 @@ class RecommendedTrackCollectionViewCell: UICollectionViewCell {
     
     private let trackNameLabel: UILabel = {
        let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .regular)
-        label.numberOfLines = 2
+        label.font = .systemFont(ofSize: 14, weight: .bold)
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
+        //label.backgroundColor = .blue
         return label
     }()
     
     private let artistNameLabel: UILabel = {
        let label = UILabel()
-        label.font = .systemFont(ofSize: 12, weight: .thin)
+        label.font = .systemFont(ofSize: 12, weight: .semibold)
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .secondaryLabel
+        //label.backgroundColor = .red
         return label
+    }()
+    
+    private let moreButton: UIButton = {
+       let button = UIButton()
+        let image = UIImage(systemName: "ellipsis", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .light))
+        button.setImage(image, for: .normal)
+        //button.backgroundColor = .green
+        button.tintColor = .secondaryLabel
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.masksToBounds = true
+        return button
     }()
     
     override init(frame: CGRect) {
@@ -43,6 +57,7 @@ class RecommendedTrackCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(albumCoverImageView)
         contentView.addSubview(trackNameLabel)
         contentView.addSubview(artistNameLabel)
+        contentView.addSubview(moreButton)
         
     }
     
@@ -59,13 +74,20 @@ class RecommendedTrackCollectionViewCell: UICollectionViewCell {
         albumCoverImageView.widthAnchor.constraint(equalToConstant: contentView.height).isActive = true
         albumCoverImageView.heightAnchor.constraint(equalToConstant: contentView.height).isActive = true
         
-        trackNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
+        trackNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6).isActive = true
         trackNameLabel.leadingAnchor.constraint(equalTo: albumCoverImageView.trailingAnchor, constant: 10).isActive = true
-        trackNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5).isActive = true
+        trackNameLabel.trailingAnchor.constraint(equalTo: moreButton.leadingAnchor, constant: -5).isActive = true
+        trackNameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
 
         artistNameLabel.topAnchor.constraint(equalTo: trackNameLabel.bottomAnchor, constant: 5).isActive = true
         artistNameLabel.leadingAnchor.constraint(equalTo: albumCoverImageView.trailingAnchor, constant: 10).isActive = true
-        artistNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5).isActive = true
+        artistNameLabel.trailingAnchor.constraint(equalTo: moreButton.trailingAnchor, constant: -5).isActive = true
+        artistNameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        moreButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
+        moreButton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        moreButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        moreButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
     
     override func prepareForReuse() {
