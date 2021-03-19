@@ -11,6 +11,17 @@ enum BrowseSectionType {
     case newReleases(viewModels: [NewReleasesCellViewModel]) //1
     case featuredPlaylists(viewModels: [FeaturedPlaylistCellViewModel]) //2
     case recommendedTracks(viewModels: [RecommendedTrackCellViewModel]) //3
+    
+    var title: String {
+        switch self {
+        case .newReleases:
+        return "Good afternoon"
+        case .featuredPlaylists:
+        return "Featured playlists"
+        case .recommendedTracks:
+        return "Recommended"
+        }
+    }
 }
 
 class HomeViewController: UIViewController {
@@ -35,24 +46,14 @@ class HomeViewController: UIViewController {
     
     private var sections = [BrowseSectionType]()
     
-//    func setGradientBackground() {
-//        let colorTop = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1).cgColor
-//        let colorBottom = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).cgColor
-//        let gradientLayer = CAGradientLayer()
-//        gradientLayer.colors = [colorTop, colorBottom]
-//        gradientLayer.startPoint = CGPoint(x: -0.5, y: -0.5)
-//        gradientLayer.endPoint = CGPoint(x: -0.25, y: 0.5)
-//        gradientLayer.frame = self.collectionView.bounds
-//        self.collectionView.layer.insertSublayer(gradientLayer, at:0)
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Good afternoon"
+        
         view.backgroundColor = .systemBackground
+        navigationItem.title = "Spotify"
+        navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .done, target: self, action: #selector(didTapSettings))
-        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont(name: "HelveticaNeue-Bold", size: 25)!]
-
+        
         configureCollectionView()
         view.addSubview(spinner)
         fetchData()
@@ -60,8 +61,24 @@ class HomeViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        //setGradientBackground()
         collectionView.frame = view.bounds
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.hidesBarsOnSwipe = true
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.navigationController?.hidesBarsOnSwipe = false
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return navigationController?.isNavigationBarHidden ?? false
     }
     
     private func configureCollectionView() {
@@ -71,11 +88,11 @@ class HomeViewController: UIViewController {
         collectionView.register(NewReleaseCollectionViewCell.self, forCellWithReuseIdentifier: NewReleaseCollectionViewCell.identifier)
         collectionView.register(FeaturedPlaylistCollectionViewCell.self, forCellWithReuseIdentifier: FeaturedPlaylistCollectionViewCell.identifier)
         collectionView.register(RecommendedTrackCollectionViewCell.self, forCellWithReuseIdentifier: RecommendedTrackCollectionViewCell.identifier)
+        collectionView.register(TitleHeaderCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: TitleHeaderCollectionReusableView.identifier)
         
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = .systemBackground
-        //setGradientBackground()
     }
     
     private func fetchData() {
@@ -246,9 +263,23 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: TitleHeaderCollectionReusableView.identifier, for: indexPath) as? TitleHeaderCollectionReusableView, kind == UICollectionView.elementKindSectionHeader else {
+            return UICollectionReusableView()
+        }
+        let section = indexPath.section
+        let title = sections[section].title
+        header.configure(with: title)
+        return header
+    }
+    
+    
     static func createSectionLayout(section: Int) -> NSCollectionLayoutSection {
-        switch section {
+        let supplementaryViews = [
+        NSCollectionLayoutBoundarySupplementaryItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(60)), elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+        ]
         
+        switch section {
         //CASE 0
         case 0:
             let item =  NSCollectionLayoutItem(
@@ -280,6 +311,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             let section = NSCollectionLayoutSection(group: horizontalGroup)
             section.orthogonalScrollingBehavior = .groupPaging
+            section.boundarySupplementaryItems = supplementaryViews
             return section
             
         //CASE 1
@@ -313,6 +345,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             let section = NSCollectionLayoutSection(group: horizontalGroup)
             section.orthogonalScrollingBehavior = .continuous
+            section.boundarySupplementaryItems = supplementaryViews
             return section
             
         //CASE 2
@@ -358,19 +391,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             )
             
             let section = NSCollectionLayoutSection(group: group)
+            section.boundarySupplementaryItems = supplementaryViews
             return section
         }
     }
     
-}
-
-extension UIImageView {
-    public func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
-        let maskPath = UIBezierPath(roundedRect: bounds,
-                                    byRoundingCorners: corners,
-                                    cornerRadii: CGSize(width: radius, height: radius))
-        let shape = CAShapeLayer()
-        shape.path = maskPath.cgPath
-        layer.mask = shape
-    }
 }

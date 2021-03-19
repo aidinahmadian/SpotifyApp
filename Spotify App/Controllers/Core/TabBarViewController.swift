@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TabBarViewController: UITabBarController {
+class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +19,7 @@ class TabBarViewController: UITabBarController {
         let vc2 = SearchViewController()
         let vc3 = LibraryViewController()
         
-        vc1.title = "Browse"
+        vc1.title = ""
         vc2.title = "Search"
         vc3.title = "Library"
         
@@ -45,5 +45,4 @@ class TabBarViewController: UITabBarController {
         
         setViewControllers([nav1, nav2, nav3], animated: false)
     }
-
 }
