@@ -92,9 +92,6 @@ class PlaylistViewController: UIViewController {
         super.viewDidLayoutSubviews()
         collectionView.frame = view.bounds
     }
-    
-    
-
 }
 
 extension PlaylistViewController: UICollectionViewDelegate, UICollectionViewDataSource {
