@@ -20,10 +20,9 @@ class RecommendedTrackCollectionViewCell: UICollectionViewCell {
     
     private let trackNameLabel: UILabel = {
        let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .bold)
+        label.font = .systemFont(ofSize: 14, weight: .semibold)
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
-        //label.backgroundColor = .blue
         return label
     }()
     
@@ -33,7 +32,6 @@ class RecommendedTrackCollectionViewCell: UICollectionViewCell {
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .secondaryLabel
-        //label.backgroundColor = .red
         return label
     }()
     

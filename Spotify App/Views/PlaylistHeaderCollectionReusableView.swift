@@ -30,7 +30,7 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
     
     private let nameLabel: UILabel = {
        let label = UILabel()
-        label.font = .systemFont(ofSize: 18, weight: .bold)
+        label.font = .systemFont(ofSize: 14, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         return label
@@ -42,7 +42,7 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
         label.numberOfLines = 2
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 14, weight: .semibold)
+        label.font = .systemFont(ofSize: 12, weight: .semibold)
         return label
     }()
     
@@ -50,7 +50,7 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
        let label = UILabel()
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 14, weight: .bold)
+        label.font = .systemFont(ofSize: 12, weight: .bold)
         return label
     }()
     
@@ -67,7 +67,7 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
         label.textAlignment = .left
         label.textColor = .secondaryLabel
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 14, weight: .bold)
+        label.font = .systemFont(ofSize: 12, weight: .bold)
         label.text = "16,489 likes • 1h 23m" //It's hard coded!! (‹‹not receiving the correct information from SP's server!!!!!››)
         return label
     }()
@@ -138,7 +138,7 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
         super.init(frame: frame)
         backgroundColor = .systemBackground
         addSubview(playlistImageView)
-        addSubview(nameLabel)
+        //addSubview(nameLabel)
         addSubview(descriptionLabel)
         addSubview(ownerLabel)
         addSubview(userImageView)
@@ -165,12 +165,12 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
         playlistImageView.widthAnchor.constraint(equalToConstant: 216).isActive = true
         playlistImageView.heightAnchor.constraint(equalToConstant: 216).isActive = true
         
-        nameLabel.topAnchor.constraint(equalTo: playlistImageView.bottomAnchor, constant: 5).isActive = true
-        nameLabel.leadingAnchor.constraint(equalTo: playlistImageView.leadingAnchor).isActive = true
-        nameLabel.trailingAnchor.constraint(equalTo: playlistImageView.trailingAnchor).isActive = true
-        nameLabel.heightAnchor.constraint(equalToConstant: 28).isActive = true
+//        nameLabel.topAnchor.constraint(equalTo: playlistImageView.bottomAnchor, constant: 5).isActive = true
+//        nameLabel.leadingAnchor.constraint(equalTo: playlistImageView.leadingAnchor).isActive = true
+//        nameLabel.trailingAnchor.constraint(equalTo: playlistImageView.trailingAnchor).isActive = true
+//        nameLabel.heightAnchor.constraint(equalToConstant: 28).isActive = true
         
-        descriptionLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor).isActive = true
+        descriptionLabel.topAnchor.constraint(equalTo: playlistImageView.bottomAnchor, constant: 5).isActive = true
         descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = true
         descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15).isActive = true
         descriptionLabel.heightAnchor.constraint(equalToConstant: 28).isActive = true
@@ -180,10 +180,11 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
         ownerLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
         ownerLabel.leadingAnchor.constraint(equalTo: userImageView.trailingAnchor, constant: 5).isActive = true
         
-        userImageView.topAnchor.constraint(equalTo: ownerLabel.topAnchor).isActive = true
+        //userImageView.topAnchor.constraint(equalTo: ownerLabel.topAnchor).isActive = true
+        userImageView.centerYAnchor.constraint(equalTo: ownerLabel.centerYAnchor).isActive = true
         userImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = true
-        userImageView.widthAnchor.constraint(equalToConstant: 28).isActive = true
-        userImageView.heightAnchor.constraint(equalToConstant: 28).isActive = true
+        userImageView.widthAnchor.constraint(equalToConstant: 22).isActive = true
+        userImageView.heightAnchor.constraint(equalToConstant: 22).isActive = true
         
         playlistInfoLabel.topAnchor.constraint(equalTo: ownerLabel.bottomAnchor, constant: 5).isActive = true
         playlistInfoLabel.leadingAnchor.constraint(equalTo: userImageView.leadingAnchor).isActive = true

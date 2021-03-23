@@ -49,14 +49,23 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemBackground
         navigationItem.title = "Spotify"
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .done, target: self, action: #selector(didTapSettings))
         
         configureCollectionView()
         view.addSubview(spinner)
+        view.backgroundColor = .systemBackground
         fetchData()
+        
+        let blurryEffect = UIBlurEffect(style: .regular)
+        let blurredStatusBar = UIVisualEffectView(effect: blurryEffect)
+        blurredStatusBar.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(blurredStatusBar)
+        blurredStatusBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        blurredStatusBar.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        blurredStatusBar.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        blurredStatusBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
     }
     
     override func viewDidLayoutSubviews() {
@@ -75,10 +84,6 @@ class HomeViewController: UIViewController {
         
         self.navigationController?.hidesBarsOnSwipe = false
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-    }
-    
-    override var prefersStatusBarHidden: Bool {
-        return navigationController?.isNavigationBarHidden ?? false
     }
     
     private func configureCollectionView() {

@@ -30,7 +30,7 @@ class AlbumViewController: UIViewController {
 
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [
-            NSCollectionLayoutBoundarySupplementaryItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(415)), elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+            NSCollectionLayoutBoundarySupplementaryItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(380)), elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
         ]
         return section
     }))
@@ -81,9 +81,6 @@ class AlbumViewController: UIViewController {
         super.viewDidLayoutSubviews()
         collectionView.frame = view.bounds
     }
-    
-    
-
 }
 
 extension AlbumViewController: UICollectionViewDelegate, UICollectionViewDataSource {
