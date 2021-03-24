@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UISearchResultsUpdating {
+class SearchViewController: UIViewController, UISearchResultsUpdating, UISearchBarDelegate {
     
     let searchController: UISearchController = {
        let vc = UISearchController(searchResultsController: SearchResultsViewController())
@@ -40,6 +40,7 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
         collectionView.backgroundColor = .systemBackground
         navigationItem.searchController = searchController
         searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
         
         APICaller.shared.getCategories { [weak self] result in
             DispatchQueue.main.async {
@@ -54,14 +55,25 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
         }
     }
     
-    func updateSearchResults(for searchController: UISearchController) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let resultsController = searchController.searchResultsController as? SearchResultsViewController,
-        let query = searchController.searchBar.text, !query.trimmingCharacters(in: .whitespaces).isEmpty else {
+        let query = searchBar.text, !query.trimmingCharacters(in: .whitespaces).isEmpty else {
             return
         }
-        //resultsController.update(with: results)
-        //Perform Search
-        //APICaller.shared.search
+        APICaller.shared.search(with: query) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let results): break
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    // 13:17
+    
+    func updateSearchResults(for searchController: UISearchController) {
     }
     
     override func viewDidLayoutSubviews() {
