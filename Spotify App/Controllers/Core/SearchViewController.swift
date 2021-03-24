@@ -63,15 +63,14 @@ class SearchViewController: UIViewController, UISearchResultsUpdating, UISearchB
         APICaller.shared.search(with: query) { result in
             DispatchQueue.main.async {
                 switch result {
-                case .success(let results): break
+                case .success(let results):
+                    resultsController.update(with: results)
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
             }
         }
     }
-    
-    // 13:17
     
     func updateSearchResults(for searchController: UISearchController) {
     }
