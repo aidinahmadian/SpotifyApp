@@ -23,10 +23,7 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
     
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        
-        tableView.estimatedRowHeight = 88.0
-        tableView.rowHeight = UITableView.automaticDimension
-        
+        tableView.rowHeight = 50
         tableView.register(SearchResultDefaultTableViewCell.self, forCellReuseIdentifier: SearchResultDefaultTableViewCell.identifier)
         tableView.register(SearchResultSubtitleTableViewCell.self, forCellReuseIdentifier: SearchResultSubtitleTableViewCell.identifier)
         tableView.isHidden = true
@@ -133,10 +130,6 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
             return cell
         }
 
-    }
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

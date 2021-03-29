@@ -15,6 +15,7 @@ class SearchResultSubtitleTableViewCell: UITableViewCell {
        let label = UILabel()
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: 14, weight: .semibold)
         return label
     }()
     
@@ -23,6 +24,7 @@ class SearchResultSubtitleTableViewCell: UITableViewCell {
         label.numberOfLines = 1
         label.textColor = .secondaryLabel
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: 12, weight: .semibold)
         return label
     }()
     
@@ -30,7 +32,6 @@ class SearchResultSubtitleTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.backgroundColor = .blue
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -50,31 +51,23 @@ class SearchResultSubtitleTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        iconImageView.sizeToFit()
-        label.sizeToFit()
         let imageSize: CGFloat = contentView.height-10
-        let labelHeight = contentView.height/2
-        //iconImageView.frame = CGRect(x: 10, y: 5, width: imageSize, height: imageSize)
         
-        iconImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
+        iconImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         iconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
-        iconImageView.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        iconImageView.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        iconImageView.widthAnchor.constraint(equalToConstant: imageSize).isActive = true
+        iconImageView.heightAnchor.constraint(equalToConstant: imageSize).isActive = true
         
-        //label.frame = CGRect(x: iconImageView.right+10, y: 0, width: contentView.width-iconImageView.right-15, height: labelHeight)
-        
-        label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
-        label.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 5).isActive = true
+        label.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        label.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 15).isActive = true
         label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
-        label.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
         
-        subtitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
-        subtitleLabel.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: -5).isActive = true
-        subtitleLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 5).isActive = true
+        subtitleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        subtitleLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 15).isActive = true
         subtitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
-        subtitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        subtitleLabel.topAnchor.constraint(equalTo: label.bottomAnchor).isActive = true
         
-//        subtitleLabel.frame = CGRect(x: iconImageView.right+10, y: label.bottom, width: contentView.width-iconImageView.right-15, height: labelHeight)
     }
     
     override func prepareForReuse() {

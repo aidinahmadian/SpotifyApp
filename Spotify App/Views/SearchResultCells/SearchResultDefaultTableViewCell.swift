@@ -15,7 +15,7 @@ class SearchResultDefaultTableViewCell: UITableViewCell {
        let label = UILabel()
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .red
+        label.font = .systemFont(ofSize: 14, weight: .semibold)
         return label
     }()
     
@@ -23,7 +23,6 @@ class SearchResultDefaultTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.backgroundColor = .green
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -42,19 +41,17 @@ class SearchResultDefaultTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-//        let imageSize: CGFloat = contentView.height-10
-//        iconImageView.frame = CGRect(x: 10, y: 5, width: imageSize, height: imageSize)
-//        iconImageView.layer.cornerRadius = imageSize/2
-//        iconImageView.layer.masksToBounds = true
-//        label.frame = CGRect(x: iconImageView.right+10, y: 0, width: contentView.width-iconImageView.right-15, height: contentView.height)
+        let imageSize: CGFloat = contentView.height-10
+        iconImageView.layer.cornerRadius = imageSize/2
+        iconImageView.layer.masksToBounds = true
         
-        iconImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
+        iconImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         iconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
-        iconImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        iconImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        iconImageView.widthAnchor.constraint(equalToConstant: imageSize).isActive = true
+        iconImageView.heightAnchor.constraint(equalToConstant: imageSize).isActive = true
         
-        label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
-        label.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 5).isActive = true
+        label.heightAnchor.constraint(equalToConstant: 39).isActive = true
+        label.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 15).isActive = true
         label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
         label.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
@@ -63,7 +60,6 @@ class SearchResultDefaultTableViewCell: UITableViewCell {
         super.prepareForReuse()
         iconImageView.image = nil
         label.text = nil
-        
     }
     
     func configure(with viewModel: SearchResultDefaultTableViewCellViewModel) {

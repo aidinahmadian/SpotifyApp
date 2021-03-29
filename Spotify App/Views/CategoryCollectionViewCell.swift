@@ -18,8 +18,8 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         imageView.tintColor = .white
         imageView.image = UIImage(systemName: "music.quarternote.3", withConfiguration: UIImage.SymbolConfiguration(pointSize: 50, weight: .regular))
         imageView.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/5))
-        //imageView.backgroundColor = .green
-        imageView.layer.cornerRadius = 8
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 4
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -28,24 +28,12 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.textColor = .white
         label.font = .systemFont(ofSize: 16, weight: .semibold)
-        //label.backgroundColor = .red
         label.numberOfLines = 3
         label.translatesAutoresizingMaskIntoConstraints = false
-       return label
+        return label
     }()
     
-    private let colors: [UIColor] = [
-        .systemBlue,
-            .systemPink,
-        .systemGray,
-        .systemGreen,
-        .systemRed,
-        .systemPurple,
-        .systemOrange,
-        .systemYellow,
-            .darkGray,
-        .systemTeal
-    ]
+    private let myColor: UIColor = .random
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -67,8 +55,6 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        //label.frame = CGRect(x: 10, y: (contentView.height)/2, width: contentView.width-20, height: contentView.height/2)
-        //imageView.frame = CGRect(x: contentView.width/2, y: 10, width: contentView.width/2, height: contentView.height/2)
         
         label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
         label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
@@ -83,7 +69,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     func configure(with viewModel: GenreCollectionViewCellViewModel) {
         label.text = viewModel.title
         imageView.sd_setImage(with: viewModel.artworkURL, completed: nil)
-        contentView.backgroundColor = colors.randomElement()
+        contentView.backgroundColor = myColor
     }
     
 }
