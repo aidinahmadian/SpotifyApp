@@ -8,7 +8,7 @@
 import SafariServices
 import UIKit
 
-class SearchViewController: UIViewController, UISearchResultsUpdating, UISearchBarDelegate {
+class SearchViewController: UIViewController, UISearchResultsUpdating, UISearchBarDelegate, UIViewControllerTransitioningDelegate {
     
     let searchController: UISearchController = {
        let vc = UISearchController(searchResultsController: SearchResultsViewController())
@@ -93,13 +93,17 @@ extension SearchViewController: SearchResultsViewControllerDelegate {
                 return
             }
             let vc = SFSafariViewController(url: url)
-            present(vc, animated: true)
+            vc.definesPresentationContext = true
+            vc.modalPresentationStyle = .automatic
+            vc.transitioningDelegate = self
+            present(vc, animated: true, completion: nil)
             
         case .album(let model):
             let vc = AlbumViewController(album: model)
             vc.navigationItem.largeTitleDisplayMode = .never
             navigationController?.pushViewController(vc, animated: true)
         case .track(let model):
+            PlayBackPresenter.startPlayback(from: self, track: model)
             break
         case .playlist(let model):
             let vc = PlaylistViewController(playlist: model)

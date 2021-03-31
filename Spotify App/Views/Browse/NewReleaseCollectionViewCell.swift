@@ -50,6 +50,7 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         contentView.clipsToBounds = true
         contentView.backgroundColor = .secondarySystemBackground
+        //contentView.backgroundColor = .blue
         contentView.layer.cornerRadius = 8
         contentView.addSubview(albumCoverImageView)
         contentView.addSubview(albumNameLabel)

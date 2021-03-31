@@ -26,6 +26,7 @@ class FeaturedPlaylistCollectionViewCell: UICollectionViewCell {
         label.numberOfLines = 0
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
+        //label.backgroundColor = .blue
         return label
     }()
     
@@ -35,12 +36,14 @@ class FeaturedPlaylistCollectionViewCell: UICollectionViewCell {
         label.numberOfLines = 0
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
+        //label.backgroundColor = .green
         return label
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.clipsToBounds = true
+        //contentView.backgroundColor = .cyan
         contentView.addSubview(playlistCoverImageView)
         contentView.addSubview(playlistNameLabel)
         contentView.addSubview(creatorNameLabel)
@@ -54,12 +57,11 @@ class FeaturedPlaylistCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
         
         playlistCoverImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
-        playlistCoverImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        playlistCoverImageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        playlistCoverImageView.widthAnchor.constraint(equalToConstant: 155).isActive = true
+        playlistCoverImageView.heightAnchor.constraint(equalToConstant: 155).isActive = true
         playlistCoverImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
         playlistNameLabel.topAnchor.constraint(equalTo: playlistCoverImageView.bottomAnchor, constant: 5).isActive = true
-        playlistNameLabel.bottomAnchor.constraint(equalTo: creatorNameLabel.topAnchor, constant: 0).isActive = true
         playlistNameLabel.leadingAnchor.constraint(equalTo: playlistCoverImageView.leadingAnchor, constant: 0).isActive = true
         playlistNameLabel.trailingAnchor.constraint(equalTo: playlistCoverImageView.trailingAnchor, constant: 0).isActive = true
         playlistNameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true

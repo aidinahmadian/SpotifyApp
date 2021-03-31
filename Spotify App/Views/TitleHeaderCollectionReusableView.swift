@@ -15,6 +15,7 @@ class TitleHeaderCollectionReusableView: UICollectionReusableView {
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "HelveticaNeue-Bold", size: 23)
+        //label.backgroundColor = .red
         return label
     }()
     
@@ -30,10 +31,10 @@ class TitleHeaderCollectionReusableView: UICollectionReusableView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        //label.frame = CGRect(x: 15, y: 0, width: width-20, height: height)
+        label.heightAnchor.constraint(equalToConstant: 30).isActive = true
         label.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 17).isActive = true
-        label.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = true
+        label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15).isActive = true
     }
     
     func configure(with title: String) {
