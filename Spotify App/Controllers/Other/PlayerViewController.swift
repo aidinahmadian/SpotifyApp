@@ -24,6 +24,7 @@ class PlayerViewController: UIViewController {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = .blue
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -35,14 +36,24 @@ class PlayerViewController: UIViewController {
         view.addSubview(imageView)
         view.addSubview(controlsView)
         controlsView.delegate = self
+        controlsView.translatesAutoresizingMaskIntoConstraints = false
         configureBarButtons()
         configure()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        imageView.frame = CGRect(x: 0, y: view.safeAreaInsets.top, width: view.width, height: view.width)
-        controlsView.frame = CGRect(x: 10, y: imageView.bottom, width: view.width-20, height: view.height-imageView.height-view.safeAreaInsets.top-view.safeAreaInsets.bottom-15)
+        
+        imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+        imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        
+        controlsView.topAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
+        controlsView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        controlsView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        
     }
     private func configure() {
         imageView.sd_setImage(with: dataSource?.imageURL, completed: nil)
