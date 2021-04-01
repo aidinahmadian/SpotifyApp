@@ -119,13 +119,13 @@ extension AlbumViewController: UICollectionViewDelegate, UICollectionViewDataSou
         collectionView.deselectItem(at: indexPath, animated: true)
         //Play the song
         let track = tracks[indexPath.row]
-        PlayBackPresenter.startPlayback(from: self, track: track)
+        PlayBackPresenter.shared.startPlayback(from: self, track: track)
     }
     
 }
 extension AlbumViewController: PlaylistHeaderCollectionReusableViewDelegate {
     func playlistHeaderCollectionReusableViewDidTapPlayAll(_ header: PlaylistHeaderCollectionReusableView) {
-        PlayBackPresenter.startPlayback(from: self, tracks: tracks)
+        PlayBackPresenter.shared.startPlayback(from: self, tracks: tracks)
         print("Playing All")
     }
 }
