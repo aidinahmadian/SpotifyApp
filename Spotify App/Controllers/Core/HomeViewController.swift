@@ -66,6 +66,12 @@ class HomeViewController: UIViewController {
         blurredStatusBar.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         blurredStatusBar.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         blurredStatusBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        
+        if NetworkMonitor.shared.isConnected {
+            print("You're on wifi")
+        } else {
+            print("You're not connected")
+        }
     }
     
     override func viewDidLayoutSubviews() {
