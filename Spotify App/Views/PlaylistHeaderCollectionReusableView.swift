@@ -156,6 +156,7 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
     
     @objc private func didTapPlayAll() {
         delegate?.playlistHeaderCollectionReusableViewDidTapPlayAll(self)
+        HapticsManager.shared.vibrateForSelection()
     }
     
     override func layoutSubviews() {

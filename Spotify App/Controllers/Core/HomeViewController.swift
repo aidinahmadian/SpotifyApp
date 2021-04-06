@@ -270,7 +270,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             vc.title = album.name
             vc.navigationItem.largeTitleDisplayMode = .never
             navigationController?.pushViewController(vc, animated: true)
-        case.recommendedTracks:
+        case .recommendedTracks:
+            HapticsManager.shared.vibrateForSelection()
             let track = tracks[indexPath.row]
             PlayBackPresenter.shared.startPlayback(from: self, track: track)
             break

@@ -106,6 +106,7 @@ extension PlayBackPresenter: PlayerViewControllerDelegate {
         else if let player = playerQueue {
             player.advanceToNextItem()
             index += 1
+            print(index)
             playerVC?.refreshUI()
         }
     }

@@ -80,11 +80,10 @@ class PlaylistViewController: UIViewController {
     }
     
     @objc private func didTapShare() {
-        
+        HapticsManager.shared.vibrateForSelection()
         guard let url = URL(string: playlist.external_urls["spotify"] ?? "") else {
             return
         }
-        
         let vc = UIActivityViewController(activityItems: [url], applicationActivities: [])
         vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
         present(vc, animated: true)
