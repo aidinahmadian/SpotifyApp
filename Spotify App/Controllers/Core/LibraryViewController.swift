@@ -15,16 +15,17 @@ class LibraryViewController: UIViewController {
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.isPagingEnabled = true
-        
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
     
     private let toggleView = LibraryToggleView()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         view.addSubview(toggleView)
+        toggleView.translatesAutoresizingMaskIntoConstraints = false
         toggleView.delegate = self
         scrollView.delegate = self
         view.addSubview(scrollView)
@@ -35,10 +36,14 @@ class LibraryViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        scrollView.frame = CGRect(x: 0, y: view.safeAreaInsets.top+55, width: view.width, height: view.height-view.safeAreaInsets.top-view.safeAreaInsets.bottom-55)
+        let height: CGFloat = view.height-view.safeAreaInsets.top-view.safeAreaInsets.bottom-55
+        scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 55).isActive = true
+        scrollView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        scrollView.heightAnchor.constraint(equalToConstant: height).isActive = true
         
-        toggleView.frame = CGRect(x: 0, y: view.safeAreaInsets.top, width: 200, height: 55)
-        
+        toggleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        toggleView.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        toggleView.heightAnchor.constraint(equalToConstant: 55).isActive = true
     }
     
     private func addChildViewController() {
@@ -52,13 +57,12 @@ class LibraryViewController: UIViewController {
         albumsVC.view.frame = CGRect(x: view.width, y: 0, width: scrollView.width, height: scrollView.height)
         albumsVC.didMove(toParent: self)
     }
-    
 }
 
 extension LibraryViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.x > (view.width-100) {
-        toggleView.update(for: .album)
+            toggleView.update(for: .album)
         }
         else {
             toggleView.update(for: .playlist)
@@ -74,6 +78,4 @@ extension LibraryViewController: LibraryToggleViewDelegate {
     func libraryToggleViewDidTapAlbums(_ toggleView: LibraryToggleView) {
         scrollView.setContentOffset(CGPoint(x: view.width, y: 0), animated: true)
     }
-    
-    
 }
