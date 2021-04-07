@@ -14,7 +14,7 @@ protocol LibraryToggleViewDelegate: AnyObject {
 
 class LibraryToggleView: UIView {
     
-    weak var delegate: LibraryToggleViewDelegate
+    weak var delegate: LibraryToggleViewDelegate?
     
     private let playlistButton: UIButton = {
         let button = UIButton()
@@ -41,11 +41,11 @@ class LibraryToggleView: UIView {
     }
     
     @objc private func didTapPlaylists() {
-        delegate.libraryToggleViewDidTapPlaylists(self)
+        delegate?.libraryToggleViewDidTapPlaylists(self)
     }
     
     @objc private func didTapAlbums() {
-        delegate.libraryToggleViewDidTapAlbums(self)
+        delegate?.libraryToggleViewDidTapAlbums(self)
     }
     
     required init?(coder: NSCoder) {

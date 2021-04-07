@@ -63,11 +63,11 @@ extension LibraryViewController: UIScrollViewDelegate {
 
 extension LibraryViewController: LibraryToggleViewDelegate {
     func libraryToggleViewDidTapPlaylists(_ toggleView: LibraryToggleView) {
-        
+        scrollView.setContentOffset(.zero, animated: true)
     }
     
     func libraryToggleViewDidTapAlbums(_ toggleView: LibraryToggleView) {
-        
+        scrollView.setContentOffset(CGPoint(x: view.width, y: 0), animated: true)
     }
     
     
